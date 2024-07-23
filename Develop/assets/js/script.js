@@ -22,12 +22,41 @@ function createTaskCard(task) {
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
-
+    $("#todo-cards").empty();
+    $("#in-progress-cards").empty();
+    $("#done-cards").empty();
+    taskList.forEach(task => {
+        const taskCard = createTaskCard(task);
+        if (task.status === "to-do") {
+            $("#todo-cards").append(taskCard);
+        } else if (task.status === "in-progress") {
+            $("#in-progress-cards").append(taskCard);
+        } else if (task.status === "done") {
+            $("#done-cards").append(taskCard);
+        }
+    });
+    $(".task-card").draggable({
+        revert: "invalid"
+    });
 }
 
 // Todo: create a function to handle adding a new task
 function handleAddTask(event){
-
+    event.preventDefault();
+    const title = $("#taskTitle").val();
+    const description = $("#taskDescription").val();
+    const dueDate = $("#taskDueDate").val();
+    const newTask = {
+        id: generateTaskId(),
+        title,
+        description,
+        dueDate,
+        status: "to-do"
+    };
+    taskList.push(newTask);
+    localStorage.setItem("tasks", JSON.stringify(taskList));
+    renderTaskList();
+    $("#formModal").modal('hide');
 }
 
 // Todo: create a function to handle deleting a task
