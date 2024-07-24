@@ -10,8 +10,16 @@ function generateTaskId() {
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
+    var backgroundColor = '' 
+    if (task.status === "to-do") {
+        backgroundColor = 'red'
+    } else if (task.status === "in-progress") {
+        backgroundColor = 'orange'
+    } else if (task.status === "done") {
+        backgroundColor = 'green'
+    }
     return `
-    <div class="task-card" data-id="${task.id}">
+    <div class="task-card ${backgroundColor}" data-id="${task.id}">
         <h3>${task.title}</h3>
         <p>${task.description}</p>
         <p>Due: ${task.dueDate}</p>

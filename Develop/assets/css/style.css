@@ -14,3 +14,15 @@ body {
 .task-card:hover {
   cursor: grab;
 }
+
+.red {
+  background-color: red;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.green {
+  background-color: green;
+}
